@@ -1,0 +1,51 @@
+# ========================
+# Root level
+# ========================
+
+# Node modules for both frontend and backend
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+**/.env
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# ========================
+# Frontend (Angular)
+# ========================
+frontend/dist/
+frontend/out-tsc/
+frontend/.angular/
+frontend/.vscode/
+frontend/.idea/
+frontend/tmp/
+frontend/*.local
+
+# TypeScript compiled files
+frontend/**/*.js
+frontend/**/*.js.map
+
+# ========================
+# Backend (Nest.js)
+# ========================
+backend/dist/
+backend/.vscode/
+backend/.idea/
+backend/*.local
+
+# TypeScript compiled files
+backend/**/*.js
+backend/**/*.js.map
+
+# Optional: coverage reports
+coverage/
