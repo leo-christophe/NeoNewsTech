@@ -42,12 +42,24 @@ export class ArticleService {
     return (lastFetch && this.isToday(new Date(lastFetch.lastFetch))) 
   }
 
-  findAll() {
-    return `This action returns all article`;
+  /**
+   * Retourne tous les articles du plus récent au plus ancien
+   * @returns Article[] Un tableau d'articles
+   */
+  async findAll() : Promise<Article[]> {
+    return await this.articleRepository.find({
+      order: {
+        publishedAt: "DESC"
+      }
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} article`;
+  async findOne(id: number) : Promise<Article | null> {
+    return await this.articleRepository.findOne({
+      where: {
+        id: id
+      }
+    });
   }
 
   update(id: number, updateArticleDto: UpdateArticleDto) {

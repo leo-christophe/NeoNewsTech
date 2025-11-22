@@ -8,10 +8,25 @@ import { Article } from 'src/article/entities/article.entity';
 
 @Controller('news')
 export class NewsController {
-    constructor(private readonly newsService: NewsService, private readonly articleService: ArticleService){}
+    constructor(
+        private readonly newsService: NewsService, 
+        private readonly articleService: ArticleService
+    ){}
 
     @Get()
-    public async getTechNews(): Promise<NewsAPIFetchData>{
+    public async FetchNews(): Promise<NewsAPIFetchData>{
+        // Vérifier si le fetch de la journée a déjà été fait -> éviter de fetch les mêmes news et dépasser le quota API
+        if ((await this.articleService.hasBeenFetchedToday())){
+            return { articles: [], status:"forbidden", totalResults: 0 };
+        }
+
+        const data : NewsAPIFetchData = await this.newsService.fetchNews();
+
+        return data;
+    }
+
+    @Get()
+    public async FetchSaveTechNews(): Promise<NewsAPIFetchData>{
         // Vérifier si le fetch de la journée a déjà été fait -> éviter de fetch les mêmes news et dépasser le quota API
         if ((await this.articleService.hasBeenFetchedToday())){
             return { articles: [], status:"forbidden", totalResults: 0 };
@@ -23,9 +38,9 @@ export class NewsController {
         // Enregistrement des news dans la BD
         data.articles.forEach(async (article) =>{
             //  Vérifier si l'article existe déjà avant de l'insérer (Précaution)
-            const doArticleExists = await this.doArticleExist(article.title);
+            const doArticleExists = await this.DoArticleExist(article.title);
             if (!doArticleExists){
-                this.createArticle(article);
+                this.CreateArticle(article);
             }
         })
         return data
@@ -36,7 +51,7 @@ export class NewsController {
      * @param title Titre de l'article
      * @returns Vrai s'il existe, faux sinon
      */
-    private async doArticleExist(title: string): Promise<Boolean> {
+    private async DoArticleExist(title: string): Promise<Boolean> {
         const exists = await this.articleService.findTitle(title);
         return exists != null;
     }
@@ -46,7 +61,7 @@ export class NewsController {
      * @param article Article récupéré à partir de l'API NewsAPI
      * @returns Résultat de la création d'article
      */
-    private createArticle(article: NewsAPIArticleData) : Promise<Article>{
+    private CreateArticle(article: NewsAPIArticleData) : Promise<Article>{
         // Formater les données
         if (article.content !=  null && article.content.includes("<ul><li></li><li></li><li></li></ul>")){
             article.content.replace("<ul><li></li><li></li><li></li></ul>","")

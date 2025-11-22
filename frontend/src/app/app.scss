@@ -1,0 +1,28 @@
+/* 
+    Fichier principal SCSS pour l'application NeoNewsTech.
+    Ce fichier importe les styles globaux et définit les variables principales.
+*/
+
+
+/* Définition des styles de base pour le body */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Styles pour les liens */
+a {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+/* Mise en page principale */
+.mainContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
