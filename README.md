@@ -21,18 +21,23 @@ A basic web application designed to deliver the latest news in the tech and gami
 * Node.js version **25.1.0**
 * npm version **11.0.0**
 
-### Back-end (Nest.js)
-
-1.  Copy the git repository locally:
+Copy the git repository locally:
     ```bash
     git clone https://github.com/leo-christophe/NeoNewsTech
+    ```
+
+### Back-end (Nest.js)
+
+1.  Host a database with PostgreSQL (Ensure a database named `[POSTGRES_DB]` is created).
+2.  Create the tables with the script `db_creation.sql` in the root folder of the git repo.
+3.  Go in the backend folder:
+    ```bash
     cd NeoNewsTech/backend
     ```
-2.  Host a database with PostgreSQL (Ensure a database named `[POSTGRES_DB]` is created).
-3.  Create the tables with the script `db_creation.sql` in the root folder of the git repo. 
-4.  Create a `.env` file in the root of the back-end folder with the following parameters:
+4.  Get a NewsAPI API Key on the official website.
+5.  Create a `.env` file in the root of the back-end folder with the following parameters:
     ```env
-    NEWS_API_KEY=***
+    NEWS_API_KEY=*** # News API Key
     POSTGRES_HOST=localhost
     POSTGRES_PORT=5432
     POSTGRES_USER=***
@@ -40,21 +45,37 @@ A basic web application designed to deliver the latest news in the tech and gami
     POSTGRES_DB=neonewstech # Example database name
     PORT=3000
     ```
-5.  Install dependencies:
+6.  Install dependencies:
     ```bash
     npm install
     ```
-6.  Start the application in development mode:
+7.  Start the application in development mode:
     ```bash
     npm run start:dev
     ```
-7.  Once the server is running, navigate to `http://localhost:3000/news` in your browser. This will trigger the fetching of the latest news from the NewsAPI and save them to your database.
-8.  The news articles are now stored in your PostgreSQL database.
+8.  Once the server is running, navigate to `http://localhost:3000/news` in your browser. This will trigger the fetching of the latest news from the NewsAPI and save them to your database.
+9.  The news articles are now stored in your PostgreSQL database.
 
 ### Front-end (Angular)
 
-* Currently in active development. Please check back later for installation steps.
-
+1.  Follow the steps to setup Angular on your PC: https://v17.angular.io/guide/setup-local. Your console should have no error when doing the `ng` command.
+2.  Go in the frontend folder:
+    ```bash
+    cd NeoNewsTech/frontend
+    ```
+3.  *Skip this part* Create a `.env` file and paste the following code:
+    ```env
+    ``` 
+4.  Install dependencies:
+    ```bash
+    npm install
+    ```
+5.  Start the app:
+    ```bash
+    ng serve
+    ```
+6.  It should be started and visible on `localhost:4200`. 
+7.  If the backend is also running, news should be appearing in the frontend. 
 ---
 
 ## Back-end Scripts
