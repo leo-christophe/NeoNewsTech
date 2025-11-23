@@ -8,10 +8,10 @@ A basic web application designed to deliver the latest news in the tech and gami
 
 ## Tech Stack
 
-* **Frontend:** Angular, TypeScript
+* **Frontend:** Angular, TypeScript, SCSS
 * **Backend:** Nest.js, TypeScript, Node.js
 * **Database:** PostgreSQL
-* **API:** NewsAPI
+* **API:** [NewsAPI](https://newsapi.org/)
 
 ---
 
@@ -29,26 +29,27 @@ A basic web application designed to deliver the latest news in the tech and gami
     cd NeoNewsTech/backend
     ```
 2.  Host a database with PostgreSQL (Ensure a database named `[POSTGRES_DB]` is created).
-3.  Create a `.env` file in the root of the back-end folder with the following parameters:
+3.  Create the tables with the script `db_creation.sql` in the root folder of the git repo. 
+4.  Create a `.env` file in the root of the back-end folder with the following parameters:
     ```env
     NEWS_API_KEY=***
     POSTGRES_HOST=localhost
     POSTGRES_PORT=5432
     POSTGRES_USER=***
     POSTGRES_PASSWORD=***
-    POSTGRES_DB=neotechdb # Example database name
+    POSTGRES_DB=neonewstech # Example database name
     PORT=3000
     ```
-4.  Install dependencies:
+5.  Install dependencies:
     ```bash
     npm install
     ```
-5.  Start the application in development mode:
+6.  Start the application in development mode:
     ```bash
     npm run start:dev
     ```
-6.  Once the server is running, navigate to `http://localhost:3000/news` in your browser. This will trigger the fetching of the latest news from the NewsAPI and save them to your database.
-7.  The news articles are now stored in your PostgreSQL database.
+7.  Once the server is running, navigate to `http://localhost:3000/news` in your browser. This will trigger the fetching of the latest news from the NewsAPI and save them to your database.
+8.  The news articles are now stored in your PostgreSQL database.
 
 ### Front-end (Angular)
 
