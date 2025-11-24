@@ -22,7 +22,7 @@ A basic web application designed to deliver the latest news in the tech and gami
 * npm version **11.0.0**
 
 Copy the git repository locally:
-    ```bash
+    ```
     git clone https://github.com/leo-christophe/NeoNewsTech
     ```
 
