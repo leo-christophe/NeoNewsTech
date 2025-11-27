@@ -10,8 +10,8 @@ async function bootstrap() {
   // Activer CORS
   app.enableCors({
     origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS'
-  })
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  });
 
   // Module de rechargement à chaud
   if (module.hot) {

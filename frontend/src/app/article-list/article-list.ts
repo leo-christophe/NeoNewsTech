@@ -16,10 +16,16 @@ export class ArticleList implements OnInit {
 
   constructor ( private articleService: ArticleService ) {}
 
+  /**
+   *  Initialise le composant en récupérant la liste des articles.
+   */
   ngOnInit(): void {
     this.fetchArticles();
   }
 
+  /**
+   *  Récupère la liste des articles depuis le service.
+   */
   private fetchArticles(): void {
     this.loading = true;
     this.articleService.getArticles().subscribe({
