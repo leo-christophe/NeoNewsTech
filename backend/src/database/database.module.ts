@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
+
       useFactory: (configService: ConfigService) => {
         const config: TypeOrmModuleOptions = {
           type: 'postgres',
@@ -16,8 +17,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           password: configService.get('POSTGRES_PASSWORD'),
           database: configService.get('POSTGRES_DB'),
           autoLoadEntities: true,
-          logging:true,
+          logging: true,
           synchronize: true, // enlever en prod
+          migrationsRun: false,
         };
         return config;
       },
@@ -25,7 +27,4 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
   ],
 })
-
-
 export class DatabaseModule {}
-

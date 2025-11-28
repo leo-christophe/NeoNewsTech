@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
@@ -13,7 +21,7 @@ export class ArticleController {
   }
 
   @Get(':title')
-  findTitle(@Param("title") title: string){
+  findTitle(@Param('title') title: string) {
     return this.articleService.findTitle(title);
   }
 

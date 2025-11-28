@@ -1,19 +1,43 @@
+import {
+  IsString,
+  IsNotEmpty,
+  IsOptional,
+  IsUrl,
+  IsDateString,
+} from 'class-validator';
+
 export class CreateArticleDto {
-    title: string;
+  @IsString()
+  @IsNotEmpty()
+  title: string;
 
-    description: string;
-    
-    url: string;
-    
-    author: string;
+  @IsString()
+  @IsNotEmpty()
+  description: string;
 
-    urlToImage: string | null;
+  @IsString()
+  @IsUrl()
+  @IsOptional()
+  url: string;
 
-    source: string;
-    
-    content: string;
-    
-    publishedAt: Date;
-    
-    fetchedAt: Date;
+  @IsString()
+  @IsOptional()
+  author: string;
+
+  @IsString()
+  @IsUrl()
+  @IsOptional()
+  urlToImage: string | null;
+
+  @IsString()
+  @IsNotEmpty()
+  source: string;
+
+  @IsString()
+  @IsNotEmpty()
+  content: string;
+
+  @IsDateString()
+  @IsNotEmpty()
+  publishedAt: Date;
 }

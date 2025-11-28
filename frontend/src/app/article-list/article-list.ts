@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Article, ArticleService } from '../article';
 import { CommonModule } from '@angular/common';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-article-list',
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule],
   standalone: true,
   templateUrl: './article-list.html',
   styleUrl: './article-list.scss',
@@ -20,6 +21,10 @@ export class ArticleList implements OnInit {
    *  Initialise le composant en récupérant la liste des articles.
    */
   ngOnInit(): void {
+    this.fetchArticles();
+  }
+
+  refreshNews(): void {
     this.fetchArticles();
   }
 

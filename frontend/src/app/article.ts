@@ -13,20 +13,22 @@ export interface Article {
   content: string | null;
   publishedAt: Date;
   fetchedAt: Date;
+  archivedAt: Date | null;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
-  private apiUrl = 'http://localhost:3000/article'; 
+  private apiUrl = 'http://localhost:3000/news'; 
 
   constructor(private http: HttpClient) { }
 
   /**
-   * Récupère tous les articles depuis l'API.
+   * Récupère tous les articles existants depuis l'API.
+   * @return Observable avec la liste des articles.
    */
   getArticles(): Observable<Article[]> {
-    return this.http.get<Article[]>(this.apiUrl);
+    return this.http.get<Article[]>(`${this.apiUrl}/get-articles`);
   }
 }

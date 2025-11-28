@@ -28,14 +28,8 @@ Copy the git repository locally:
 
 ### Back-end (Nest.js)
 
-1.  Host a database with PostgreSQL (Ensure a database named `[POSTGRES_DB]` is created).
-2.  Create the tables with the script `db_creation.sql` in the root folder of the git repo.
-3.  Go in the backend folder:
-    ```bash
-    cd NeoNewsTech/backend
-    ```
-4.  Get a NewsAPI API Key on the official website.
-5.  Create a `.env` file in the root of the back-end folder with the following parameters:
+1.  Get a NewsAPI API Key on the official website.
+2.  Create a `.env` file in the root of the back-end folder with the following parameters:
     ```env
     NEWS_API_KEY=*** # News API Key
     POSTGRES_HOST=localhost
@@ -45,15 +39,24 @@ Copy the git repository locally:
     POSTGRES_DB=neonewstech # Example database name
     PORT=3000
     ```
-6.  Install dependencies:
+3.  Go in the backend folder:
+    ```bash
+    cd NeoNewsTech/backend
+    ```
+4.  Install dependencies:
     ```bash
     npm install
+    ```
+5. Create a PostgreSQL database with the same name in your .env file (POSTGRES_DB) 
+6. Apply the latest migration:
+    ```bash
+    npm run migration:run
     ```
 7.  Start the application in development mode:
     ```bash
     npm run start:dev
     ```
-8.  Once the server is running, navigate to `http://localhost:3000/news` in your browser. This will trigger the fetching of the latest news from the NewsAPI and save them to your database.
+8.  Once the server is running, navigate to `http://localhost:3000/news/fetch-save` in your browser. This will trigger the fetching of the latest news from the NewsAPI and save them to your database. You can also look at all news at `http://localhost:3000/news/get-articles`.
 9.  The news articles are now stored in your PostgreSQL database.
 
 ### Front-end (Angular)
