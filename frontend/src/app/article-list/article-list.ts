@@ -34,8 +34,8 @@ export class ArticleList implements OnInit {
   private fetchArticles(): void {
     this.loading = true;
     this.articleService.getArticles().subscribe({
-      next: (articles : Article[]) => {
-        this.articles = articles;
+      next: (articles : any) => {
+        this.articles = articles.articles;
         this.loading = false;
       },
       error: (err: any) => {
