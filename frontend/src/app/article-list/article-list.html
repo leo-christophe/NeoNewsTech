@@ -1,9 +1,7 @@
 <h2>Liste des Articles</h2>
-
 @if (loading) {
   <div> Chargement des articles en cours... </div>
 }
-
 <button (click)="refreshNews()"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="refresh"></mat-icon></button>
 
 @if (error) {
@@ -11,7 +9,7 @@
 }
 
 <div class="article-container">
-  
+
   @for (article of articles; track  article.id) {
     <div class="article-card">
       <h3>{{ article.title }}</h3>

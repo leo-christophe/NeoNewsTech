@@ -21,8 +21,8 @@ export class Article {
    * Résumé ou description courte de l'article.
    * @example "Une analyse approfondie sur..."
    */
-  @Column({ type: 'varchar', length: 750, nullable: false })
-  description: string;
+  @Column({ type: 'varchar', length: 750, nullable: true })
+  description?: string | null;
 
   /**
    * Lien direct vers l'article original.

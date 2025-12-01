@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Article, ArticleService } from '../article';
 import { CommonModule } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
+import { finalize } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-article-list',
@@ -25,7 +27,9 @@ export class ArticleList implements OnInit {
   }
 
   refreshNews(): void {
+    this.loading = true;
     this.fetchArticles();
+    this.loading = false;
   }
 
   /**
@@ -33,9 +37,13 @@ export class ArticleList implements OnInit {
    */
   private fetchArticles(): void {
     this.loading = true;
-    this.articleService.getArticles().subscribe({
-      next: (articles : any) => {
-        this.articles = articles.articles;
+    this.articleService.getArticles()
+    .pipe(
+      finalize(() => this.loading = false)
+    )
+    .subscribe({
+      next: (response : HttpResponse<Article[]>) => {
+        this.articles = response.body || [];
         this.loading = false;
       },
       error: (err: any) => {

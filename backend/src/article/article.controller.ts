@@ -10,24 +10,27 @@ import {
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
+import { ArticleSyncService } from 'src/article-sync-service/article-sync-service.service';
 
 @Controller('article')
 export class ArticleController {
-  constructor(private readonly articleService: ArticleService) {}
+  constructor(
+    private readonly articleService: ArticleService,
+    private readonly articleSyncService: ArticleSyncService,
+  ) {}
+
+  /**
+   * C'est ici que la magie opère.
+   * Un seul endpoint pour l'utilisateur, logique cachée derrière.
+   */
+  @Get()
+  async findAllSmart() {
+    return await this.articleSyncService.getArticlesSmart();
+  }
 
   @Post()
   create(@Body() createArticleDto: CreateArticleDto) {
     return this.articleService.create(createArticleDto);
-  }
-
-  @Get(':title')
-  findTitle(@Param('title') title: string) {
-    return this.articleService.findTitle(title);
-  }
-
-  @Get()
-  findAll() {
-    return this.articleService.findAll();
   }
 
   @Get(':id')
