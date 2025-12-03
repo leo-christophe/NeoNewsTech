@@ -25,7 +25,7 @@ export class ArticleSyncService {
     // Vérifier si on a déjà fetché aujourd'hui
     const isCacheFresh = await this.articleService.hasBeenFetchedToday();
     console.log('isCacheFresh:', isCacheFresh);
-    if (!isCacheFresh) {
+    if (isCacheFresh) {
       this.logger.log('Cache frais. Retour des articles depuis la BD.');
       return await this.articleService.findAll();
     }

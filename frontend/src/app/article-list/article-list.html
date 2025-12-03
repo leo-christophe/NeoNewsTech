@@ -1,22 +1,32 @@
-<h2>Liste des Articles</h2>
+<h2>Articles à lire: {{ getUnarchivedArticles().length }}</h2>
 @if (loading) {
   <div> Chargement des articles en cours... </div>
 }
-<button (click)="refreshNews()"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="refresh"></mat-icon></button>
+<button (click)="refreshNews()" title="Rafraichir" aria-label="Rafraichir les articles" class="refresh-Btn btn">
+  <mat-icon aria-hidden="false" aria-label="Rafraichir" fontIcon="refresh"></mat-icon>
+</button>
 
 @if (error) {
   <div style="color: red;">{{ error }}</div>
 }
 
 <div class="article-container">
-
-  @for (article of articles; track  article.id) {
+  @for (article of getUnarchivedArticles(); track article.id) {
     <div class="article-card">
       <h3>{{ article.title }}</h3>
-      <p>{{ article.description }}</p>
+      <p class="article-desc">{{ article.description }}</p>
+      <p class="published-date">Publié le: {{ article.publishedAt | date:'longDate' }}</p>
       <div class="article-img-container">
         <img [src]="article.urlToImage" [alt]="'Image de l\'article '+ article.title" class="article-img"/>
       </div>
+      <span class="action-Btn">
+        <div (click)="goTo(article.url)" class="link-Btn" title="Lire l'article" aria-label="Lire l'article">
+          <mat-icon  fontIcon="link" aria-label="Lien vers l'article"></mat-icon>
+        </div>
+        <div (click)="archiveArticle(article.id)" class="archive-Btn" title="Archiver" aria-label="Archiver l'article">
+          <mat-icon fontIcon="archive" aria-label="Archive de l'article"></mat-icon>
+        </div>
+      </span>
     </div>
   }
 
